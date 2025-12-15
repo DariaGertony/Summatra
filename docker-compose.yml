@@ -1,0 +1,80 @@
+
+
+services:
+  dbworker:
+    build: ./dbworker
+    depends_on:
+      - postgres
+    volumes:
+      - ./dbworker:/app
+    environment:
+      - PG_HOST=${DB_HOST}
+      - POSTGRES_DB=${DB_NAME}
+      - POSTGRES_USER=${DB_USER}
+      - POSTGRES_PASSWORD=${DB_PASS}
+      - DB_PORT=${DB_PORT}
+      - PYTHONUNBUFFERED=1
+      - DB_PORT=${DB_PORT} 
+    expose:
+      - "3434"
+    networks:
+    - meme_net
+    restart: unless-stopped
+
+  talker:
+    build: ./talker
+    volumes:
+      - ./talker:/app
+    expose:
+      - "3456"
+    environment:
+      - TOKEN=${TOKEN}
+      - PYTHONUNBUFFERED=1
+    networks:
+    - meme_net
+    restart: unless-stopped
+
+  tgbotik:
+    build: ./tgbotik
+    volumes:
+      - ./tgbotik:/app
+    environment:
+      - TGTOKEN=${TGTOKEN}
+      - PYTHONUNBUFFERED=1
+    networks:
+    - meme_net
+    restart: unless-stopped
+
+  webworker:
+    build: ./webworker
+    volumes:
+      - ./webworker:/app
+    environment:
+      - PYTHONUNBUFFERED=1
+    ports:
+      - "8501:8501" 
+    depends_on: [dbworker]
+    networks:
+    - meme_net
+    restart: unless-stopped
+
+
+  postgres:
+    image: postgres:15
+    networks:
+    - meme_net
+    environment:
+      POSTGRES_DB: ${DB_NAME}
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASS}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+    expose:
+      - "${DB_PORT}"
+
+volumes:
+   postgres_data:
+
+networks:
+  meme_net:
+    driver: bridge

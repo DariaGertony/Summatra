@@ -1,0 +1,6 @@
+fastapi
+requests
+pytelegrambotapi
+aiohttp
+dotenv
+asyncio

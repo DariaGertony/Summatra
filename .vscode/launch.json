@@ -1,0 +1,21 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "name": "talker",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/talker/talker.py",
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/talker/venv/bin/python"
+        },
+        {
+            "name": "tgbotik",
+            "type": "python",
+            "request": "launch",
+            "program": "${workspaceFolder}/tgbotik/tgbot.py",
+            "console": "integratedTerminal",
+            "python": "${workspaceFolder}/tgbotik/venv/bin/python"
+        }
+    ]
+}

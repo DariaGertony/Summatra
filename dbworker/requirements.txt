@@ -1,0 +1,5 @@
+fastapi
+requests
+psycopg[binary]
+uvicorn
+psycopg[pool]
