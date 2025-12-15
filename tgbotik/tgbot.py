@@ -68,7 +68,7 @@ async def send_base64_photo(bot, chat_id,base64_string, caption=None):
         print(f"Ошибка отправки фото: {e}")
         return False
 
-# Использование в вашем коде:
+# Использование в вашем коде: (я искал как кинуть фотку в сооб но в итоге оставил ток эти 4 строки тк оно как оказалось не умеет писать бота и вот пришлось дать еще 1 коммит)
 @bot.message_handler(commands=['sendmeme'])
 async def send_meme(message):
     await bot.send_message(message.chat.id, 'send the id of the meme')
