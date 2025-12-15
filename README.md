@@ -1,4 +1,4 @@
-to launch copy env.example but with your info 
+to launch copy env.example to .envbut with your info 
 then 
 ```
 docker-compose up
